@@ -6,7 +6,7 @@ import io.github.ensgijs.nbt.io.NamedTag;
 import io.github.ensgijs.nbt.io.SilentIOException;
 import io.github.ensgijs.nbt.mca.*;
 import io.github.ensgijs.nbt.mca.util.ChunkIterator;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import io.github.ensgijs.nbt.mca.util.RegionBoundingRectangle;
 import io.github.ensgijs.nbt.util.ArgValidator;
 import io.github.ensgijs.nbt.util.Stopwatch;

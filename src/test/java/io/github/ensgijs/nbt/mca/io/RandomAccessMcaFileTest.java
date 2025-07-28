@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 import io.github.ensgijs.nbt.mca.io.RandomAccessMcaFile.SectorManager;
 import io.github.ensgijs.nbt.mca.io.RandomAccessMcaFile.SectorManager.SectorBlock;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import io.github.ensgijs.nbt.mca.util.PalettizedCuboid;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 

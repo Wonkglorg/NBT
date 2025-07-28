@@ -2,6 +2,7 @@ package io.github.ensgijs.nbt.mca.util;
 
 import io.github.ensgijs.nbt.io.TextNbtHelpers;
 import io.github.ensgijs.nbt.tag.*;
+import io.github.ensgijs.nbt.util.IntPointXYZ;
 
 import java.util.*;
 import java.util.function.Predicate;

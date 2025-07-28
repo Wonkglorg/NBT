@@ -6,6 +6,7 @@ import io.github.ensgijs.nbt.tag.*;
 import io.github.ensgijs.nbt.mca.io.MoveChunkFlags;
 import io.github.ensgijs.nbt.query.NbtPath;
 import io.github.ensgijs.nbt.util.ArgValidator;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.util.*;
 

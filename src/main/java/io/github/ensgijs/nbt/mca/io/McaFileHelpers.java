@@ -5,7 +5,7 @@ import io.github.ensgijs.nbt.mca.McaEntitiesFile;
 import io.github.ensgijs.nbt.mca.McaFileBase;
 import io.github.ensgijs.nbt.mca.McaPoiFile;
 import io.github.ensgijs.nbt.mca.McaRegionFile;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.File;
 import java.io.IOException;

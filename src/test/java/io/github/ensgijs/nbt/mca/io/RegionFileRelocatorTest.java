@@ -6,7 +6,7 @@ import io.github.ensgijs.nbt.mca.PoiChunk;
 import io.github.ensgijs.nbt.mca.TerrainChunk;
 import io.github.ensgijs.nbt.mca.entities.Entity;
 import io.github.ensgijs.nbt.mca.entities.EntityFactory;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import io.github.ensgijs.nbt.query.NbtPath;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 

@@ -2,6 +2,7 @@ package io.github.ensgijs.nbt.mca.util;
 
 import io.github.ensgijs.nbt.mca.ChunkBase;
 import io.github.ensgijs.nbt.mca.McaFileBase;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.util.Iterator;
 

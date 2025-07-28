@@ -1,7 +1,7 @@
 package io.github.ensgijs.nbt.mca.io;
 
 import io.github.ensgijs.nbt.mca.*;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.IOException;
 

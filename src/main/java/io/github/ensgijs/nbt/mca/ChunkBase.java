@@ -9,6 +9,7 @@ import io.github.ensgijs.nbt.mca.io.MoveChunkFlags;
 import io.github.ensgijs.nbt.mca.util.*;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 import io.github.ensgijs.nbt.tag.Tag;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import io.github.ensgijs.nbt.util.ObservedCompoundTag;
 import io.github.ensgijs.nbt.query.NbtPath;
 

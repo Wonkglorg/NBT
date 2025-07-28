@@ -1,4 +1,4 @@
-package io.github.ensgijs.nbt.mca.util;
+package io.github.ensgijs.nbt.util;
 
 /**
  * An immutable Minecraft style 2D point where the dimensions are X and Z.

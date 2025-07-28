@@ -1,10 +1,11 @@
 package io.github.ensgijs.nbt.mca.util;
 
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import junit.framework.TestCase;
 
 import java.util.List;
 
-import static io.github.ensgijs.nbt.mca.util.IntPointXZ.XZ;
+import static io.github.ensgijs.nbt.util.IntPointXZ.XZ;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertThrows;
 

@@ -1,7 +1,7 @@
 package io.github.ensgijs.nbt.mca;
 
 import io.github.ensgijs.nbt.io.TextNbtHelpers;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import io.github.ensgijs.nbt.mca.util.RegionBoundingRectangle;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 import io.github.ensgijs.nbt.tag.IntArrayTag;

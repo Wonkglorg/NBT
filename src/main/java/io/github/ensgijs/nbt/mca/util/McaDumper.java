@@ -4,6 +4,7 @@ import io.github.ensgijs.nbt.io.TextNbtHelpers;
 import io.github.ensgijs.nbt.mca.ChunkBase;
 import io.github.ensgijs.nbt.mca.io.LoadFlags;
 import io.github.ensgijs.nbt.mca.io.McaFileChunkIterator;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.File;
 import java.io.IOException;

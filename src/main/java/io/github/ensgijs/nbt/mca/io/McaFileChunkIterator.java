@@ -6,7 +6,7 @@ import io.github.ensgijs.nbt.mca.PoiChunk;
 import io.github.ensgijs.nbt.mca.TerrainChunk;
 import io.github.ensgijs.nbt.io.PositionTrackingInputStream;
 import io.github.ensgijs.nbt.mca.util.ChunkIterator;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.*;
 import java.nio.ByteBuffer;

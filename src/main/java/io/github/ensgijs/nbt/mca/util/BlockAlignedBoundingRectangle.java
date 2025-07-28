@@ -1,5 +1,7 @@
 package io.github.ensgijs.nbt.mca.util;
 
+import io.github.ensgijs.nbt.util.IntPointXZ;
+
 import java.util.Collection;
 import java.util.function.ToIntFunction;
 

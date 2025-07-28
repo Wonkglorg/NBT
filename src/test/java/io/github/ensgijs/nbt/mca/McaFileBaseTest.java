@@ -1,6 +1,6 @@
 package io.github.ensgijs.nbt.mca;
 
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 // TODO: implement abstract test pattern for McaFileBase & refactor MCAFileTest like mad
 public class McaFileBaseTest extends McaTestCase {

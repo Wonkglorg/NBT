@@ -6,7 +6,7 @@ import io.github.ensgijs.nbt.mca.io.LoadFlags;
 import io.github.ensgijs.nbt.mca.io.McaFileHelpers;
 import io.github.ensgijs.nbt.mca.util.ChunkIterator;
 import io.github.ensgijs.nbt.util.ArgValidator;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

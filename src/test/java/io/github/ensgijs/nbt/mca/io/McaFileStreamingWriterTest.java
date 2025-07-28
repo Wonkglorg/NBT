@@ -3,7 +3,7 @@ package io.github.ensgijs.nbt.mca.io;
 import io.github.ensgijs.nbt.mca.McaRegionFile;
 import io.github.ensgijs.nbt.mca.McaTestCase;
 import io.github.ensgijs.nbt.mca.TerrainChunk;
-import io.github.ensgijs.nbt.mca.util.IntPointXZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.File;
 import java.io.IOException;

@@ -7,6 +7,8 @@ import io.github.ensgijs.nbt.mca.io.RandomAccessMcaFile;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 import io.github.ensgijs.nbt.tag.StringTag;
 import io.github.ensgijs.nbt.util.ArgValidator;
+import io.github.ensgijs.nbt.util.IntPointXYZ;
+import io.github.ensgijs.nbt.util.IntPointXZ;
 
 import java.io.Closeable;
 import java.io.File;
@@ -15,8 +17,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-
-import static io.github.ensgijs.nbt.mca.DataVersion.JAVA_1_18_21W37A;
 
 /**
  * Abstracts away the interactions with individual chunks and mca files.

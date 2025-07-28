@@ -6,6 +6,7 @@ import io.github.ensgijs.nbt.tag.ListTag;
 import io.github.ensgijs.nbt.tag.LongArrayTag;
 import io.github.ensgijs.nbt.tag.StringTag;
 import io.github.ensgijs.nbt.NbtTestCase;
+import io.github.ensgijs.nbt.util.IntPointXYZ;
 
 import java.io.IOException;
 import java.util.Arrays;

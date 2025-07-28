@@ -1,5 +1,6 @@
 package io.github.ensgijs.nbt.mca.util;
 
+import io.github.ensgijs.nbt.util.IntPointXZ;
 import junit.framework.TestCase;
 
 public class IntPointXZTest extends TestCase {

@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import java.util.List;
 
-import static io.github.ensgijs.nbt.mca.util.IntPointXZ.XZ;
+import static io.github.ensgijs.nbt.util.IntPointXZ.XZ;
 import static org.junit.Assert.assertThrows;
 
 public class RegionBoundingRectangleTest extends TestCase {
