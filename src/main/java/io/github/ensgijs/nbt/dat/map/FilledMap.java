@@ -2,6 +2,7 @@ package io.github.ensgijs.nbt.dat.map;
 
 import io.github.ensgijs.nbt.io.BinaryNbtHelpers;
 import io.github.ensgijs.nbt.io.CompressionType;
+import io.github.ensgijs.nbt.io.NamedTag;
 import io.github.ensgijs.nbt.mca.util.VersionedDataContainer;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 import io.github.ensgijs.nbt.tag.IntTag;
@@ -23,7 +24,6 @@ import java.util.logging.Logger;
 @SuppressWarnings("unused")
 public class FilledMap implements VersionedDataContainer{
 	private static final Logger LOGGER = Logger.getLogger(FilledMap.class.getName());
-	public static final int SCALE = 3;
 	public static final int IMAGE_WIDTH = 128;
 	public static final int IMAGE_HEIGHT = 128;
 	/**
@@ -125,13 +125,17 @@ public class FilledMap implements VersionedDataContainer{
 		}
 	}
 	
+	public void saveAsPng(Path path) {
+		saveDataAsPng(path, imageData, mapId);
+	}
+	
 	/**
 	 * Saves the current MapData to a png,
 	 *
 	 * @param saveTo a path or png file, if the path is a directory appends the current mapDatas name
 	 * as the new pngs name.
 	 */
-	public void saveAsPng(Path saveTo) {
+	public static void saveDataAsPng(Path saveTo, byte[] imageData, int id) {
 		if(saveTo == null){
 			LOGGER.severe("Save path is null, cannot save PNG.");
 			return;
@@ -143,35 +147,65 @@ public class FilledMap implements VersionedDataContainer{
 		}
 		
 		if(Files.isDirectory(saveTo)){
-			if(mapId == -1){
-				throw new RuntimeException("Provided Save location is a folder, and no valid mapId is give, unable to determine " +
-										   "name. Either provide a file Path or supply a mapId");
+			if(id == -1){
+				throw new IllegalArgumentException("Provided Save location is a folder, and no valid mapId is give, unable to determine " +
+												   "name. Either provide a file Path or supply a mapId");
 			}
-			saveTo = saveTo.resolve("map_%d.dat".formatted(mapId));
-		}
-		
-		if(imageData == null || imageData.length != IMAGE_WIDTH * IMAGE_HEIGHT){
-			LOGGER.severe("FilledMap has incorrect image size, cannot save PNG.");
-			LOGGER.severe("Expected length: " + IMAGE_WIDTH * IMAGE_HEIGHT + " Actual: " + (imageData == null ? 0 : imageData.length));
-			return;
+			saveTo = saveTo.resolve("map_%d.dat".formatted(id));
 		}
 		
 		try{
-			BufferedImage image = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-			
-			for(int i = 0; i < imageData.length; i++){
-				int x = i % IMAGE_WIDTH;
-				int y = i / IMAGE_WIDTH;
-				Color color = FilledMapColor.getJavaColor(imageData[i] & 0xFF);
-				image.setRGB(x, y, color.getRGB());
-			}
-			
+			BufferedImage image = convertToImage(imageData);
 			try(OutputStream os = Files.newOutputStream(saveTo)){
 				ImageIO.write(image, "png", os);
 			}
 		} catch(IOException e){
 			LOGGER.severe(e.getMessage());
 		}
+	}
+	
+	private static BufferedImage convertToImage(byte[] imageData) {
+		if(imageData == null || imageData.length != IMAGE_WIDTH * IMAGE_HEIGHT){
+			LOGGER.severe("FilledMap has incorrect image size, cannot save PNG.");
+			LOGGER.severe("Expected length: " + IMAGE_WIDTH * IMAGE_HEIGHT + " Actual: " + (imageData == null ? 0 : imageData.length));
+			throw new IllegalArgumentException("FilledMap has incorrect image size");
+		}
+		
+		BufferedImage image = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+		
+		for(int i = 0; i < imageData.length; i++){
+			int x = i % IMAGE_WIDTH;
+			int y = i / IMAGE_WIDTH;
+			Color color = FilledMapColor.getJavaColor(imageData[i] & 0xFF);
+			image.setRGB(x, y, color.getRGB());
+		}
+		return image;
+	}
+	
+	
+	/**
+	 * An optimized method to read out the pixels of a provided map file without instantiating the
+	 * full class as {@link FilledMap#FilledMap(CompoundTag)}
+	 *
+	 * @param file the path to the file
+	 * @return an array of pixels in the length of {@link FilledMap#IMAGE_HEIGHT} * {@link FilledMap#IMAGE_WIDTH}
+	 * @throws IOException
+	 */
+	public static byte[] getPixelsFromFile(Path file) {
+		NamedTag tag = null;
+		try{
+			tag = BinaryNbtHelpers.read(file, FilledMap.COMPRESSION_TYPE);
+		} catch(IOException e){
+			throw new RuntimeException(e);
+		}
+		CompoundTag root = (CompoundTag) tag.getTag();
+		CompoundTag data = root.getCompoundTag("data");
+		
+		byte[] imageData = data.getByteArray("colors");
+		if(imageData.length != IMAGE_WIDTH * IMAGE_HEIGHT){
+			imageData = new byte[IMAGE_WIDTH * IMAGE_HEIGHT];
+		}
+		return imageData;
 	}
 	
 	/**
