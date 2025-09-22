@@ -1,5 +1,6 @@
 package io.github.ensgijs.nbt.io;
 
+import io.github.ensgijs.nbt.tag.CompoundTag;
 import io.github.ensgijs.nbt.tag.Tag;
 
 import java.io.ByteArrayInputStream;
@@ -49,6 +50,16 @@ public final class BinaryNbtHelpers {
 
 	public static NamedTag read(String file, CompressionType compression) throws IOException {
 		return read(Path.of(file), compression);
+	}
+	
+	public static CompoundTag readCompound(Path file, CompressionType compression) throws IOException {
+		try (InputStream fis = Files.newInputStream(file)) {
+			return (CompoundTag) new BinaryNbtDeserializer(compression).fromStream(fis).getTag();
+		}
+	}
+	
+	public static CompoundTag readCompound(String file, CompressionType compression) throws IOException {
+		return readCompound(Path.of(file), compression);
 	}
 
 

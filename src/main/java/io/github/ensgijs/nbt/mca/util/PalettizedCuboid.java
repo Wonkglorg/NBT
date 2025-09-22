@@ -496,7 +496,7 @@ public class PalettizedCuboid<E extends Tag<?>> implements TagWrapper<CompoundTa
     }
 
     public int indexOf(IntPointXYZ xyz) {
-        return indexOf(xyz.x, xyz.y, xyz.z);
+        return indexOf(xyz.getX(), xyz.getY(), xyz.getZ());
     }
 
     /**
@@ -619,7 +619,7 @@ public class PalettizedCuboid<E extends Tag<?>> implements TagWrapper<CompoundTa
     }
 
     public void set(IntPointXYZ xyz, E element) {
-        set(indexOf(xyz.x, xyz.y, xyz.z), element);
+        set(indexOf(xyz.getX(), xyz.getY(), xyz.getZ()), element);
     }
 
     /**
@@ -680,7 +680,7 @@ public class PalettizedCuboid<E extends Tag<?>> implements TagWrapper<CompoundTa
      * @param xyz2 inclusive bound
      */
     public void set(IntPointXYZ xyz1, E element, IntPointXYZ xyz2) {
-        set(xyz1.x, xyz1.y, xyz1.z, element, xyz2.x, xyz2.y, xyz2.z);
+        set(xyz1.getX(), xyz1.getY(), xyz1.getZ(), element, xyz2.getX(), xyz2.getY(), xyz2.getZ());
     }
 
     protected void checkBounds(int x, int y, int z) {

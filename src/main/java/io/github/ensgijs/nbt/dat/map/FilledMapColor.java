@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum MapColor {
+public enum FilledMapColor{
 	NONE(0, 0x00000000),
 	GRASS(4, 0xFF7FB238),
 	SAND(8, 0xFFF7E9A3),
@@ -76,7 +76,7 @@ public enum MapColor {
 	private static final int[] mul = new int[]{180, 220, 255, 135};
 	
 	static {
-		for(MapColor mc : MapColor.values()){
+		for(FilledMapColor mc : FilledMapColor.values()){
 			int a = mc.color >> 24 & 0xFF;
 			int r = mc.color >> 16 & 0xFF;
 			int g = mc.color >> 8 & 0xFF;
@@ -99,7 +99,7 @@ public enum MapColor {
 		}
 	}
 	
-	MapColor(int id, int color) {
+	FilledMapColor(int id, int color) {
 		this.id = id;
 		this.color = color;
 	}
@@ -118,7 +118,7 @@ public enum MapColor {
 	
 	public static int findClosestColor(int color) {
 		if(color >> 24 == 0){
-			return MapColor.NONE.color;
+			return FilledMapColor.NONE.color;
 		}
 		int r = color >> 16 & 0xFF;
 		int g = color >> 8 & 0xFF;

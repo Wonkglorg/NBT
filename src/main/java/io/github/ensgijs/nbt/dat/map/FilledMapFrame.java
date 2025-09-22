@@ -2,13 +2,13 @@ package io.github.ensgijs.nbt.dat.map;
 
 import io.github.ensgijs.nbt.util.IntPointXYZ;
 
-public class MapFrame {
+public class FilledMapFrame{
 
 	private int id;
 	private int rotation;
 	private IntPointXYZ pos;
 
-	public MapFrame(int id, int rotation, IntPointXYZ pos) {
+	public FilledMapFrame(int id, int rotation, IntPointXYZ pos) {
 		this.id = id;
 		this.rotation = rotation;
 		this.pos = pos;

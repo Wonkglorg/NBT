@@ -1,6 +1,5 @@
 package io.github.ensgijs.nbt.dat.map;
 
-import com.wonkglorg.minecraft.point.Point3i;
 import io.github.ensgijs.nbt.tag.CompoundTag;
 import io.github.ensgijs.nbt.util.IntPointXYZ;
 import org.json.JSONArray;
@@ -9,26 +8,26 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapIconData {
+public class FilledMapIconData{
 
 	private String name;
-	private List<MapText> textElements;
-	private MapIcon color;
+	private List<FilledMapText> textElements;
+	private FilledMapIcon color;
 	private IntPointXYZ pos;
 
-	public MapIconData(String name, String color, IntPointXYZ pos) {
+	public FilledMapIconData(String name, String color, IntPointXYZ pos) {
 		setName(name);
-		this.color = MapIcon.byName(color);
+		this.color = FilledMapIcon.byName(color);
 		this.pos = pos;
 	}
 
-	public MapIconData(String name, MapIcon color, IntPointXYZ pos) {
+	public FilledMapIconData(String name, FilledMapIcon color, IntPointXYZ pos) {
 		setName(name);
 		this.color = color;
 		this.pos = pos;
 	}
 
-	public List<MapText> getTextElements() {
+	public List<FilledMapText> getTextElements() {
 		return textElements;
 	}
 
@@ -45,7 +44,7 @@ public class MapIconData {
 			this.name = name;
 		} catch (Exception e) {
 			textElements = new ArrayList<>();
-			textElements.add(new MapText(name, "", false, false, false, false));
+			textElements.add(new FilledMapText(name, "", false, false, false, false));
 			this.name = createJSONObjectName(name);
 		}
 	}
@@ -56,11 +55,11 @@ public class MapIconData {
 		return stringName.toString();
 	}
 
-	public MapIcon getColor() {
+	public FilledMapIcon getColor() {
 		return color;
 	}
 
-	public void setIcon(MapIcon color) {
+	public void setIcon(FilledMapIcon color) {
 		this.color = color;
 	}
 
@@ -72,10 +71,10 @@ public class MapIconData {
 		this.pos = pos;
 	}
 
-	private List<MapText> parseJson(String json) {
+	private List<FilledMapText> parseJson(String json) {
 		JSONObject result = new JSONObject(json);
 
-		List<MapText> textElements = new ArrayList<>();
+		List<FilledMapText> textElements = new ArrayList<>();
 		addTextElement(result, textElements);
 
 		if (result.has("extra")) {
@@ -85,7 +84,7 @@ public class MapIconData {
 		return textElements;
 	}
 
-	private void parseExtra(JSONArray array, List<MapText> textElements) {
+	private void parseExtra(JSONArray array, List<FilledMapText> textElements) {
 		for (Object entry : array) {
 			addTextElement((JSONObject) entry, textElements);
 			if (((JSONObject) entry).has("extra")) {
@@ -94,7 +93,7 @@ public class MapIconData {
 		}
 	}
 
-	private void addTextElement(JSONObject map, List<MapText> textElements) {
+	private void addTextElement(JSONObject map, List<FilledMapText> textElements) {
 		String text = map.getString("text");
 		if (text == null) {
 			return;
@@ -105,7 +104,7 @@ public class MapIconData {
 		boolean strikethrough = map.has("strikethrough") && map.getBoolean("strikethrough");
 		boolean underline = map.has("underline") && map.getBoolean("underline");
 
-		MapText textElement = new MapText(text, color, bold, italic, strikethrough, underline);
+		FilledMapText textElement = new FilledMapText(text, color, bold, italic, strikethrough, underline);
 		textElements.add(textElement);
 	}
 

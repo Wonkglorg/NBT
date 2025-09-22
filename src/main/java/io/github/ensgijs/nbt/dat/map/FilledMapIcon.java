@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum MapIcon {
+public enum FilledMapIcon{
 	
 	PLAYER("player", 0xffffff, 0, 0),
 	FRAME("frame", 0x00ff00, 8, 0),
@@ -43,17 +43,17 @@ public enum MapIcon {
 		//private static Image icons = FileHelper.getIconFromResources("map_icons");
 	}
 	
-	private static final Map<String, MapIcon> names = new HashMap<>();
+	private static final Map<String, FilledMapIcon> names = new HashMap<>();
 	
 	static {
 		Arrays.stream(values()).forEach(v -> names.put(v.name, v));
 	}
 	
-	MapIcon(String name, int color, int x, int y) {
+	FilledMapIcon(String name, int color, int x, int y) {
 		this(name, color, x, y, false);
 	}
 	
-	MapIcon(String name, int color, int x, int y, boolean banner) {
+	FilledMapIcon(String name, int color, int x, int y, boolean banner) {
 		this.name = name;
 		this.color = color;
 		this.banner = banner;
@@ -91,8 +91,8 @@ public enum MapIcon {
 		return name;
 	}
 	
-	public static MapIcon byName(String name) {
-		MapIcon mi = names.get(name);
+	public static FilledMapIcon byName(String name) {
+		FilledMapIcon mi = names.get(name);
 		if(mi == null){
 			return null;
 		}

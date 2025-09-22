@@ -1,6 +1,6 @@
 package io.github.ensgijs.nbt.dat.map;
 
-public enum MapDimension {
+public enum FilledMapDimension{
 
 	OVERWORLD(0, "minecraft:overworld", "Overworld"),
 	THE_END(1, "minecraft:the_end", "The End"),
@@ -10,7 +10,7 @@ public enum MapDimension {
 	private final String textID;
 	private final String text;
 
-	MapDimension(int id, String textID, String text) {
+	FilledMapDimension(int id, String textID, String text) {
 		this.id = id;
 		this.textID = textID;
 		this.text = text;
@@ -21,8 +21,8 @@ public enum MapDimension {
 		return text;
 	}
 
-	public static MapDimension byId(int id) {
-		for (MapDimension dimension : values()) {
+	public static FilledMapDimension byId(int id) {
+		for (FilledMapDimension dimension : values()) {
 			if (id == dimension.id) {
 				return dimension;
 			}
@@ -30,8 +30,8 @@ public enum MapDimension {
 		throw new IllegalArgumentException("invalid dimension: " + id);
 	}
 
-	public static MapDimension byTextId(String id) {
-		for (MapDimension dimension : values()) {
+	public static FilledMapDimension byTextId(String id) {
+		for (FilledMapDimension dimension : values()) {
 			if (dimension.textID.equals(id)) {
 				return dimension;
 			}

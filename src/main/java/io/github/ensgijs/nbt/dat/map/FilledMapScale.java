@@ -1,6 +1,6 @@
 package io.github.ensgijs.nbt.dat.map;
 
-public enum MapScale {
+public enum FilledMapScale{
 
 	SCALE_0(0),
 	SCALE_1(1),
@@ -10,7 +10,7 @@ public enum MapScale {
 
 	private final int id;
 
-	MapScale(int id) {
+	FilledMapScale(int id) {
 		this.id = id;
 	}
 
@@ -19,8 +19,8 @@ public enum MapScale {
 		return "" + id;
 	}
 
-	public static MapScale byId(int id) {
-		for (MapScale scale : values()) {
+	public static FilledMapScale byId(int id) {
+		for (FilledMapScale scale : values()) {
 			if (id == scale.id) {
 				return scale;
 			}

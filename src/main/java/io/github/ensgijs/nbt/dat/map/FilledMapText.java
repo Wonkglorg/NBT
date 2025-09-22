@@ -1,6 +1,6 @@
 package io.github.ensgijs.nbt.dat.map;
 
-public class MapText {
+public class FilledMapText{
 	private final String text;
 	private final String color;
 	private final boolean bold;
@@ -8,8 +8,8 @@ public class MapText {
 	private final boolean underlined;
 	private final boolean strikethrough;
 
-	public MapText(String text, String color, boolean bold, boolean italic, boolean strikethrough,
-			boolean underline) {
+	public FilledMapText(String text, String color, boolean bold, boolean italic, boolean strikethrough,
+						 boolean underline) {
 		this.text = text;
 		this.color = color;
 		this.bold = bold;

@@ -180,7 +180,7 @@ public class McaWorld implements Closeable {
         if (chunk == null) return Integer.MIN_VALUE;
         var hm = chunk.getHeightMap(heightmap);
         if (hm == null) return Integer.MIN_VALUE;
-        return hm.get2d(xz.x & 0xF, xz.z & 0xF);
+        return hm.get2d(xz.getX() & 0xF, xz.getZ() & 0xF);
     }
 
     /**
@@ -207,10 +207,10 @@ public class McaWorld implements Closeable {
         if (chunk == null) return null;
 
         if (!LegacyBiomes.versionHasLegacyBiomes(chunk.getDataVersion())) {
-            var biomeTag = chunk.getBiomeAtByRef(xyz.x, xyz.y, xyz.z);
+            var biomeTag = chunk.getBiomeAtByRef(xyz.getX(), xyz.getY(), xyz.getZ());
             return biomeTag != null ? biomeTag.getValue() : null;
         } else {
-            return LegacyBiomes.keyedName(chunk.getDataVersion(), chunk.getLegacyBiomeAt(xyz.x, xyz.y, xyz.z));
+            return LegacyBiomes.keyedName(chunk.getDataVersion(), chunk.getLegacyBiomeAt(xyz.getX(), xyz.getY(), xyz.getZ()));
         }
     }
 
@@ -230,15 +230,15 @@ public class McaWorld implements Closeable {
      */
     public boolean setBiomeAt(IntPointXYZ xyz, String biome) throws IOException {
         if (isReadonly) throw new IOException("opened in readonly mode");
-        var chunk = getChunk(xyz.x >> 4, xyz.z >> 4);
+        var chunk = getChunk(xyz.getX() >> 4, xyz.getZ() >> 4);
         if (chunk == null) return false;
         if (!LegacyBiomes.versionHasLegacyBiomes(chunk.getDataVersion())) {
-            return chunk.setBiomeAt(xyz.x, xyz.y, xyz.z, new StringTag(biome));
+            return chunk.setBiomeAt(xyz.getX(), xyz.getY(), xyz.getZ(), new StringTag(biome));
         } else {
-            if (xyz.y < 0 || xyz.y > 255) return false;
+            if (xyz.getY() < 0 || xyz.getY() > 255) return false;
             int id = LegacyBiomes.id(chunk.getDataVersion(), biome);
             if (id < 0) return false;
-            chunk.setLegacyBiomeAt(xyz.x, xyz.y, xyz.z, id);
+            chunk.setLegacyBiomeAt(xyz.getX(), xyz.getY(), xyz.getZ(), id);
             return true;
         }
     }
@@ -266,7 +266,7 @@ public class McaWorld implements Closeable {
      */
     public CompoundTag getBlockAt(IntPointXYZ xyz) throws IOException {
         var chunk = getChunk(xyz.transformBlockToChunk());
-        return chunk != null ? chunk.getBlockAt(xyz.x, xyz.y, xyz.z) : null;
+        return chunk != null ? chunk.getBlockAt(xyz.getX(), xyz.getY(), xyz.getZ()) : null;
     }
 
     /**
@@ -282,7 +282,7 @@ public class McaWorld implements Closeable {
      */
     public CompoundTag getBlockAtByRef(IntPointXYZ xyz) throws IOException {
         var chunk = getChunk(xyz.transformBlockToChunk());
-        return chunk != null ? chunk.getBlockAtByRef(xyz.x, xyz.y, xyz.z) : null;
+        return chunk != null ? chunk.getBlockAtByRef(xyz.getX(), xyz.getY(), xyz.getZ()) : null;
     }
 
     /**
@@ -296,7 +296,7 @@ public class McaWorld implements Closeable {
     public String getBlockNameAt(IntPointXYZ xyz) throws IOException {
         var chunk = getChunk(xyz.transformBlockToChunk());
         if (chunk == null) return null;
-        var blockTag = chunk.getBlockAtByRef(xyz.x, xyz.y, xyz.z);
+        var blockTag = chunk.getBlockAtByRef(xyz.getX(), xyz.getY(), xyz.getZ());
         return blockTag != null ? blockTag.getString("Name") : null;
     }
 
@@ -317,7 +317,7 @@ public class McaWorld implements Closeable {
     public boolean setBlockAt(IntPointXYZ xyz, CompoundTag tag) throws IOException {
         if (isReadonly) throw new IOException("opened in readonly mode");
         var chunk = getChunk(xyz.transformBlockToChunk());
-        return chunk != null && chunk.setBlockAt(xyz.x, xyz.y, xyz.z, tag);
+        return chunk != null && chunk.setBlockAt(xyz.getX(), xyz.getY(), xyz.getZ(), tag);
     }
 
     /**
