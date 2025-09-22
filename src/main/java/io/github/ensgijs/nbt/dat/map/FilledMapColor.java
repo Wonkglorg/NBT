@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+/**
+ * Represents each Minecraft's block and their associated <a href="https://mcreator.net/wiki/list-block-map-colors">Color</a>
+ */
 @SuppressWarnings("unused")
 public enum FilledMapColor{
 	NONE(0, 0x00000000),
@@ -72,12 +75,24 @@ public enum FilledMapColor{
 	private final int id;
 	private final int color;
 	
+	/**
+	 * Cached Ids to Colors
+	 */
 	private static final Map<Integer, Integer> colors = new HashMap<>();
+	/**
+	 * Cached Colors to Ids
+	 */
 	private static final Map<Integer, Integer> ids = new HashMap<>();
+	/**
+	 * Cache to link ids to java colors
+	 */
 	private static final Map<Integer, Color> javaColorCache = new HashMap<>();
 	private static final Color EMPTY = new Color(0, 0, 0, 0);
 	private static final Logger LOGGER = Logger.getLogger(FilledMapColor.class.getName());
 	
+	/**
+	 * 4 Multiplier values for brightness <a href="https://minecraft.wiki/w/Item_format/Maps">Minecraft Wiki</a>
+	 */
 	private static final int[] mul = new int[]{180, 220, 255, 135};
 	
 	static {
