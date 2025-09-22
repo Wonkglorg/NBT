@@ -18,8 +18,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+@SuppressWarnings("unused")
 public class FilledMap implements VersionedDataContainer{
+	private static final Logger LOGGER = Logger.getLogger(FilledMap.class.getName());
 	public static final int SCALE = 3;
 	public static final int IMAGE_WIDTH = 128;
 	public static final int IMAGE_HEIGHT = 128;
@@ -97,7 +100,9 @@ public class FilledMap implements VersionedDataContainer{
 		
 		if(data.getListTag(FRAMES_TAG) != null){
 			for(CompoundTag frame : data.getListTag(FRAMES_TAG).asCompoundTagList()){
-				FilledMapFrame mapFrame = new FilledMapFrame(frame.getInt(ENTITY_ID_TAG), frame.getInt(ROTATION_TAG), parsePos(frame.getCompoundTag(POS_TAG)));
+				FilledMapFrame mapFrame = new FilledMapFrame(frame.getInt(ENTITY_ID_TAG),
+						frame.getInt(ROTATION_TAG),
+						parsePos(frame.getCompoundTag(POS_TAG)));
 				this.frames.add(mapFrame);
 			}
 		}
@@ -128,12 +133,12 @@ public class FilledMap implements VersionedDataContainer{
 	 */
 	public void saveAsPng(Path saveTo) {
 		if(saveTo == null){
-			System.out.println("File is null, cannot save PNG.");
+			LOGGER.severe("Save path is null, cannot save PNG.");
 			return;
 		}
 		
 		if(Files.exists(saveTo)){
-			System.out.println("File already exists, cannot save PNG.");
+			LOGGER.severe("Save path already exists, cannot save PNG at: '" + saveTo + "'.");
 			return;
 		}
 		
@@ -146,9 +151,8 @@ public class FilledMap implements VersionedDataContainer{
 		}
 		
 		if(imageData == null || imageData.length != IMAGE_WIDTH * IMAGE_HEIGHT){
-			System.out.println("Invalid image data");
-			System.out.println("Expected length: " + IMAGE_WIDTH * IMAGE_HEIGHT + " Actual: " + (imageData == null ? 0 : imageData.length));
-			System.out.println("Data: " + this);
+			LOGGER.severe("FilledMap has incorrect image size, cannot save PNG.");
+			LOGGER.severe("Expected length: " + IMAGE_WIDTH * IMAGE_HEIGHT + " Actual: " + (imageData == null ? 0 : imageData.length));
 			return;
 		}
 		
@@ -166,7 +170,7 @@ public class FilledMap implements VersionedDataContainer{
 				ImageIO.write(image, "png", os);
 			}
 		} catch(IOException e){
-			e.printStackTrace();
+			LOGGER.severe(e.getMessage());
 		}
 	}
 	
@@ -199,14 +203,14 @@ public class FilledMap implements VersionedDataContainer{
 		root.putInt(DATA_VERSION_TAG, dataVersion);
 		data.putBoolean(LOCKED_TAG, locked);
 		data.putByte(SCALE_TAG, scale.getId());
-		data.putBoolean("trackingPosition", trackingPosition);
+		data.putBoolean(TRACKING_POSITION_TAG, trackingPosition);
 		data.putBoolean(UNLIMITED_TRACKING_TAG, unlimitedTracking);
-		data.putString("dimension", dimension.getTextID());
+		data.putString(DIMENSION_TAG, dimension.getTextID());
 		data.putByteArray(COLORS_TAG, imageData);
 		
 		ListTag<CompoundTag> icons = new ListTag<>(CompoundTag.class);
 		banners.forEach(b -> icons.add(b.toTag()));
-		data.put("banners", icons);
+		data.put(BANNERS_TAG, icons);
 		
 		data.putInt(X_CENTER_TAG, xCenter);
 		data.putInt(Z_CENTER_TAG, zCenter);

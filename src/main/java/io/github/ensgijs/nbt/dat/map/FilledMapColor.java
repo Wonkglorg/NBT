@@ -1,9 +1,10 @@
 package io.github.ensgijs.nbt.dat.map;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.logging.Logger;
+@SuppressWarnings("unused")
 public enum FilledMapColor{
 	NONE(0, 0x00000000),
 	GRASS(4, 0xFF7FB238),
@@ -63,7 +64,10 @@ public enum FilledMapColor{
 	WARPED_NYLIUM(220, 0xFF167E86),
 	WARPED_STEM(224, 0xFF3A8E8C),
 	WARPED_HYPHAE(228, 0xFF562C3E),
-	WARPED_WART_BLOCK(232, 0xFF14B485);
+	WARPED_WART_BLOCK(232, 0xFF14B485),
+	DEEPSLATE(236, 0xFF646464),
+	RAW_IRON(240, 0xFFD8AF93),
+	GLOW_LICHEN(244, 0xFF7FA796);
 	
 	private final int id;
 	private final int color;
@@ -72,6 +76,7 @@ public enum FilledMapColor{
 	private static final Map<Integer, Integer> ids = new HashMap<>();
 	private static final Map<Integer, Color> javaColorCache = new HashMap<>();
 	private static final Color EMPTY = new Color(0, 0, 0, 0);
+	private static final Logger LOGGER = Logger.getLogger(FilledMapColor.class.getName());
 	
 	private static final int[] mul = new int[]{180, 220, 255, 135};
 	
@@ -94,7 +99,7 @@ public enum FilledMapColor{
 				
 				colors.put(newId, newC);
 				ids.put(newC, newId);
-				javaColorCache.put(newId, new Color(newR / 255f, newG / 255f, newB / 255f, a / 255f));
+				javaColorCache.put(newId, a == 0 ? EMPTY : new Color(newR / 255f, newG / 255f, newB / 255f, a / 255f));
 			}
 		}
 	}
@@ -109,7 +114,12 @@ public enum FilledMapColor{
 	}
 	
 	public static Color getJavaColor(int id) {
-		return javaColorCache.getOrDefault(id, EMPTY);
+		if(javaColorCache.containsKey(id)){
+			return javaColorCache.get(id);
+		}
+		LOGGER.severe("Found uncached color with id: " + id + "!");
+		LOGGER.severe("Likely Cause: There is a new minecraft version with colors not yet registered in this enum!");
+		return Color.GREEN;
 	}
 	
 	public static int getClosestColorID(int color) {
